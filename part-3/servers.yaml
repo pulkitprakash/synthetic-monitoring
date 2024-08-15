@@ -1,0 +1,6 @@
+servers:
+  - google.com
+  - github.com
+  - stackoverflow.com
+  - yahoo.com
+intervals: 2
