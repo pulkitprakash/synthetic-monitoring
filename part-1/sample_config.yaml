@@ -1,0 +1,34 @@
+# ./otelcol --config=collector-config.yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:6004
+      http:
+        endpoint: 0.0.0.0:6006
+
+processors:
+
+exporters:
+  logging:
+    verbosity: detailed
+  prometheus:
+    endpoint: 0.0.0.0:9464
+  otlphttp/jaeger:
+    endpoint: "http://jaeger:4318"
+    tls:
+      insecure: true
+
+service:
+  extensions: []
+  pipelines:
+    traces:
+      receivers: [ otlp ]
+      processors: []
+      exporters: [ logging, otlphttp/jaeger ]
+    logs:
+      receivers: [ otlp ]
+      exporters: [ logging ]
+    metrics:
+      receivers: [ otlp ]
+      exporters: [ logging, prometheus ]
