@@ -59,7 +59,8 @@ def set_metrics(stats, server):
 
 if __name__ == '__main__':
     start_http_server(8000)
-    data = read_yaml('servers.yaml')
+    filepath = input("Enter the server address to ping: ")
+    data = read_yaml(filepath)
     servers = data['servers']
     interval = data['intervals']
     while True:
