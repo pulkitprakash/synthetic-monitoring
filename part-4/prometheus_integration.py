@@ -7,6 +7,8 @@ from prometheus_client import start_http_server, Gauge, Counter
 metrics = dict()
 
 def read_yaml(file_path):
+    ''' To read yaml config file at given file_path
+    '''
     try:
         with open(file_path, 'r') as file:
             data = yaml.safe_load(file)
@@ -25,6 +27,8 @@ def read_yaml(file_path):
     return None
 
 def ping_server(target):
+    ''' To ping target server and return statistics
+    '''
     ping_parser = pingparsing.PingParsing()
     transmitter = pingparsing.PingTransmitter()
 
@@ -36,6 +40,8 @@ def ping_server(target):
     return statistics
 
 def set_metrics(stats, server):
+    ''' To record metrics in a Prometheus defined way
+    '''
     domain = server.split('.')[0]
     print(domain)
     gauge_metrics = ['rtt_avg', 'rtt_min', 'rtt_max', 'packet_loss_count']
